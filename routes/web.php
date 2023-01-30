@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\{DashboardController, PgrController, PosisiController, SeksiController, ShipmentController, TransaksiController, UserController};
+use App\Http\Controllers\{DashboardController, ProduksiController, UserController};
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,25 +18,17 @@ Route::get('/', function () {
     return view('auth.login');
 });
 Auth::routes();
-Route::get('/dashboard', [DashboardController::class, "index"])->name('dashboard');
-// hanya admin yang dapat akses route ini
-Route::resource('/user', UserController::class);
-Route::get('/user/hapus/{id}', [UserController::class, "delete"]);
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, "index"])->name('dashboard');
+    // hanya admin yang dapat akses route ini
+    Route::resource('/user', UserController::class);
+    Route::get('/user/hapus/{id}', [UserController::class, "delete"]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::resource('/produksi', ProduksiController::class);
+    Route::get('/produksi/hapus/{id}', [ProduksiController::class, "delete"]);
 
-Route::resource('transaksi', TransaksiController::class);
-Route::get('/transaksi/hapus/{id}', [TransaksiController::class, "delete"]);
-
-Route::resource('shipment', ShipmentController::class);
-Route::get('/shipment/hapus/{id}', [ShipmentController::class, "delete"]);
-Route::get('/shipment/tambah/{id}', [ShipmentController::class, "create"])->name('shipment.tambah');
-
-Route::resource('/posisi', PosisiController::class);
-Route::get('/posisi/hapus/{id}', [PosisiController::class, "delete"]);
-
-Route::resource('/seksi', SeksiController::class);
-Route::get('/seksi/hapus/{id}', [SeksiController::class, "delete"]);
-
-Route::resource('pgr', PgrController::class);
-Route::get('pgr/hapus/{id}', [PgrController::class, "delete"]);
+    Route::get('/export-produksi', [ProduksiController::class, 'ExportExcel'])->name('export-excel');
+    Route::get('/export-produksi-csv', [ProduksiController::class, 'ExportCSV'])->name('export-csv');
+    Route::get('/import-data', [ProduksiController::class, 'ViewImportData'])->name('import-data');
+    Route::post('/import-data', [ProduksiController::class, 'ImportData'])->name('import');
+});

@@ -17,7 +17,7 @@
     <link href="{{ asset('asset/css/sb-admin-2.min.css') }}" rel="stylesheet">
 </head>
 
-<body style="background: #f2f2f2">
+<body style="background: #c0c0c0">
     <div class="container">
         <!-- Outer Row -->
         <div class="row justify-content-center">
@@ -30,8 +30,8 @@
                             <div class="col-lg-20">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Sistem Informasi PT. Asahan Alumunium<br><br>
-                                            <br><img src="{{ asset('asset/img/inalum.png') }}" width="160">
+                                        <h1 class="h4 text-gray-900 mb-4">Sistem Informasi <br> Jadwal Produksi<br><br>
+                                            <br><img src="{{ asset('asset/img/mandom.png') }}" width="160">
                                         </h1>
                                     </div>
                                     <form method="POST" action="{{ route('login') }}">
@@ -65,27 +65,14 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="form-group row">
-                                            <div class="col-md-12 offset-md-12">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" name="remember"
-                                                        id="remember" {{ old('remember') ? 'checked' : '' }}>
-                                                    <label class="form-check-label" for="remember">
-                                                        {{ __('Remember Me') }}
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
+
                                         <div class="form-group row mb-0">
-                                            <div class="col-md-12 offset-md-12">
-                                                <button type="submit" class="btn btn-primary">
-                                                    {{ __('Login') }}
+                                            <div class="col-md-12">
+                                                <button type="submit" class="btn btn-primary col-md-12"
+                                                    style="background: black;">
+                                                    {{ __('LOGIN') }}
                                                 </button>
-                                                @if (Route::has('password.request'))
-                                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                                        {{ __('Forgot Your Password?') }}
-                                                    </a>
-                                                @endif
+
                                             </div>
                                         </div>
                                         {{-- <div class="form-group row mt-4">

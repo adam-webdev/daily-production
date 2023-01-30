@@ -5,11 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Transaksi extends Model
+class Produksi extends Model
 {
     use HasFactory;
-    public function shipment()
-    {
-        return $this->hasMany(Shipment::class);
-    }
+    protected $fillable = ['kode', 'nama', 'kg', 'mesin', 'lot', 'keterangan', 'tanggal', 'aksi'];
 }
