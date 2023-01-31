@@ -13,6 +13,8 @@
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
     <title>MANDOM || @yield('title')</title>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <link href="{{ asset('asset/vendor/select2/dist/css/select2.min.css') }}" rel="stylesheet">
     <link href="{{ asset('asset/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link
@@ -57,6 +59,11 @@
                 <a class="nav-link text-white text-dark" href="{{ route('produksi.index') }}">
                     <i class="fas fa-clock"></i>
                     <span>Jadwal Produksi</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white text-dark" href="{{ route('laporan') }}">
+                    <i class="fas fa-fw fa-file-pdf"></i>
+                    <span>Laporan Jadwal</span></a>
             </li>
 
 

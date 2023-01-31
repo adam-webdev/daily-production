@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Exports\ProduksiExport;
 use App\Imports\ProduksiImport;
 use App\Models\Produksi;
+// use Barryvdh\DomPDF\PDF;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 use Maatwebsite\Excel\Facades\Excel;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class ProduksiController extends Controller
 {
@@ -164,5 +166,27 @@ class ProduksiController extends Controller
         return Excel::download(new ProduksiExport, 'jadwal-produksi.csv', \Maatwebsite\Excel\Excel::CSV, [
             'Content-Type' => 'text/csv',
         ]);
+    }
+
+    public function view_produksi()
+    {
+        return view('produksi.laporan.laporan');
+    }
+
+    public function produksi_pdf(Request $request)
+    {
+        $periode = $request->periode;
+        if ($periode == "all") {
+            $data = Produksi::get();
+            $pdf = PDF::loadView('produksi.laporan.print', compact('data', 'periode'));
+            return $pdf->stream('laporan-jadwal-produksi-all.pdf');
+        } else if ($periode == "periode") {
+            $tgl_awal = $request->awal;
+            $tgl_akhir = $request->akhir;
+            $data = Produksi::whereBetween('tanggal', [$tgl_awal, $tgl_akhir])
+                ->orderBy('tanggal', 'ASC')->get();
+            $pdf = PDF::loadView('produksi.laporan.print', compact('data', 'periode', 'tgl_awal', 'tgl_akhir'));
+            return $pdf->stream('laporan-jadwal-produksi-perperiode.pdf');
+        }
     }
 }

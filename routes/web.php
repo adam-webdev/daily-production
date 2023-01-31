@@ -31,4 +31,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/export-produksi-csv', [ProduksiController::class, 'ExportCSV'])->name('export-csv');
     Route::get('/import-data', [ProduksiController::class, 'ViewImportData'])->name('import-data');
     Route::post('/import-data', [ProduksiController::class, 'ImportData'])->name('import');
+
+    Route::get('/laporan-jadwal-produksi', [ProduksiController::class, 'view_produksi'])->name('laporan');
+    Route::post('/laporan-jadwal-produksi', [ProduksiController::class, 'produksi_pdf'])->name('laporan.print');
 });

@@ -10,6 +10,8 @@
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Data Jadwal </h1>
     <div>
+        <a href="{{ route('laporan') }}" class="btn text-white" style="background: rgb(67, 228, 228)"><i
+                class="fas fa-file-pdf"></i>Cetak PDF</a>
         <a href="{{ route('import-data') }}" class="btn text-white" style="background: rgb(28, 191, 191)"><i
                 class="fas fa-file-excel"></i>Import Excel</a>
         <a href="{{ route('export-excel') }}" class="btn text-white" style="background: rgb(37, 170, 170)"><i
@@ -50,7 +52,7 @@
                     @foreach ($jadwal_produksi as $t)
                         <tr align="center">
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $t->tanggal }}</td>
+                            <td>{{ \Carbon\Carbon::parse($t->tanggal)->format('d-m-Y') }}</td>
                             <td>{{ $t->kode }}</td>
                             <td>{{ $t->nama }}</td>
                             <td>{{ $t->kg }}</td>

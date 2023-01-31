@@ -3,6 +3,9 @@
     <div class="card p-2">
         <h4 class="p-2">Selamat Datang <b>{{ $user }}</b></h4>
         <div class="row px-4 mt-3 justify-content-between align-items-center">
+            <h1>PT MANDOM INDONESIA TBK</h1>
+            <img width="100%" height="500px" style="object-fit: contain" src="{{ asset('asset/img/banner-mandom.jpg') }}"
+                alt="">
 
         </div>
 
